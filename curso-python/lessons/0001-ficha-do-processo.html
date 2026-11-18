@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Lição 1 · A ficha do processo</title>
+  <link rel="stylesheet" href="../assets/estilo-slides.css">
+  <link rel="stylesheet" href="../assets/componentes-interativos.css">
+  <link rel="stylesheet" href="../assets/licao-01.css">
+</head>
+<body class="new-edition licao-rica" data-storage-key="python-esmat-licao-01" data-completion-mode="local" data-require-all-slides>
+  <a class="skip-link" href="#s1">Ir ao conteúdo</a>
+  <div class="barra-topo" role="progressbar" aria-label="Progresso da lição" aria-valuemin="1" aria-valuemax="16" aria-valuenow="1"><span data-progress-fill></span></div>
+  <nav class="dot-nav" aria-label="Navegação entre slides"></nav>
+  <div class="visually-hidden" data-announcer aria-live="polite"></div>
+  <div class="salvo" data-saved-notice role="status">Resposta salva localmente</div>
+
+  <main class="apresentacao">
+
+    <!-- 1 · ABERTURA -->
+    <section class="slide title-slide master-hero" data-slide="1" aria-labelledby="s1">
+      <div class="slide-inner">
+        <div class="slide-topo"><span class="etapa"><span class="etapa-icone" aria-hidden="true">◆</span>Abertura</span><span class="slide-counter">01 / 16</span></div>
+        <div class="hero-figura">
+          <div>
+            <h1 id="s1" tabindex="-1">A ficha do processo</h1>
+            <p class="subtitulo">Lição 1 · Variáveis, tipos de dados e leitura de erros em Python</p>
+            <p class="pergunta-guia">Onde o computador guarda o nome da parte, e como ele sabe se pode fazer conta com aquilo?</p>
+            <div class="caixa"><p><strong>Vitória observável:</strong> ao final, você monta a ficha de um processo em quatro variáveis com o tipo certo, calcula as custas de 1% e aponta o tipo e a causa de um erro lendo a última linha do traceback.</p></div>
+            <p class="nota"><strong>Você já viu:</strong> a capa do processo no eproc, a tela de consulta com campos que têm nome (Número do Processo, Partes, Órgão Julgador, Valor da Causa) e um conteúdo em cada um. Esta lição faz o computador guardar exatamente esses campos: é a primeira peça do gerador de despachos que o curso vai construir.</p>
+          </div>
+          <figure class="figura-licao" aria-labelledby="cap-1" style="--razao-svg:1.333">
+            <svg viewBox="0 0 320 240" role="img" aria-labelledby="cap-1">
+              <rect x="10" y="14" width="128" height="212" rx="8" fill="#FFFFFF" stroke="#CBD5E1"/>
+              <text x="20" y="34" class="l1-svg-titulo">CAPA DO PROCESSO</text>
+              <text x="20" y="46" class="l1-svg-rotulo">eproc · consulta (dados fictícios)</text>
+              <g class="l1-svg-campo"><text x="20" y="68" class="l1-svg-rotulo">Número do Processo</text><text x="20" y="82" class="l1-svg-dado">0004512-33.2026…</text></g>
+              <g class="l1-svg-campo"><text x="20" y="108" class="l1-svg-rotulo">Partes</text><text x="20" y="122" class="l1-svg-dado">Ana Ribeiro Nogueira</text></g>
+              <g class="l1-svg-campo"><text x="20" y="148" class="l1-svg-rotulo">Órgão Julgador</text><text x="20" y="162" class="l1-svg-dado">1ª Vara Cível</text></g>
+              <g class="l1-svg-campo"><text x="20" y="188" class="l1-svg-rotulo">Valor da Causa</text><text x="20" y="202" class="l1-svg-dado">R$ 15.400,00</text></g>
+              <path d="M146 120 h26" stroke="#07164D" stroke-width="2" marker-end="url(#seta1)"/>
+              <defs><marker id="seta1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#07164D"/></marker></defs>
+              <g transform="translate(182 22)">
+                <rect class="l1-cx l1-cx-str" width="130" height="40" rx="12"/><text class="l1-cx-nome" x="8" y="14">numero_processo</text><text class="l1-cx-tipo" x="122" y="14" text-anchor="end">str</text><text class="l1-cx-valor" x="65" y="32" text-anchor="middle">“0004512-33…”</text>
+              </g>
+              <g transform="translate(182 72)">
+                <rect class="l1-cx l1-cx-str" width="130" height="40" rx="12"/><text class="l1-cx-nome" x="8" y="14">nome_parte</text><text class="l1-cx-tipo" x="122" y="14" text-anchor="end">str</text><text class="l1-cx-valor" x="65" y="32" text-anchor="middle">“Ana Ribeiro…”</text>
+              </g>
+              <g transform="translate(182 122)">
+                <rect class="l1-cx l1-cx-str" width="130" height="40" rx="12"/><text class="l1-cx-nome" x="8" y="14">vara</text><text class="l1-cx-tipo" x="122" y="14" text-anchor="end">str</text><text class="l1-cx-valor" x="65" y="32" text-anchor="middle">“1ª Vara Cível”</text>
+              </g>
+              <g transform="translate(182 172)">
+                <rect class="l1-cx l1-cx-float" width="130" height="40" rx="2"/><text class="l1-cx-nome" x="8" y="14">valor_causa</text><text class="l1-cx-tipo" x="122" y="14" text-anchor="end">float</text><text class="l1-cx-valor" x="65" y="32" text-anchor="middle">15400.00</text>
+              </g>
+            </svg>
+            <figcaption id="cap-1">Os quatro campos da capa do processo no eproc (redesenhada, com dados fictícios) viram quatro caixinhas com nome. Três guardam texto (borda arredondada, aspas, rótulo <code>str</code>); a do valor da causa guarda um número decimal (canto reto, rótulo <code>float</code>).</figcaption>
+          </figure>
+        </div>
+        <div class="slide-rodape"><p class="progresso-slide"><span class="progresso-trilho" role="img" aria-label="Progresso: slide 1 de 16"><span class="progresso-preenchido" style="width:6%"></span></span><span class="progresso-texto">Slide 1 de 16</span></p><div class="slide-nav"><button type="button" class="btn-nav" data-nav-prev disabled><span aria-hidden="true">←</span> Anterior</button><button type="button" class="btn-nav" data-nav-next>Próximo <span aria-hidden="true">→</span></button></div></div>
+      </div>
+    </section>
+
+    <!-- 2 · VÍDEO DE INSTRUÇÃO (degrau "ver"; não conta para a conclusão) -->
+    <section class="slide master-dense" data-slide="2" aria-labelledby="s2">
+      <div class="slide-inner">
+        <div class="slide-topo"><span class="etapa"><span class="etapa-icone" aria-hidden="true">▶</span>Vídeo da lição</span><span class="slide-counter">02 / 16</span></div>
+        <h2 id="s2" tabindex="-1">Antes de começar: o vídeo da lição</h2>
+        <div class="duas-colunas">
+          <div class="l1-video" data-video-id="Yg9cZWtmTNs" data-video-titulo="Lição 1 · A ficha do processo">
+            <div class="l1-video-quadro" data-video-quadro>
+              <svg viewBox="0 0 640 360" role="img" aria-labelledby="l1-video-capa-tit">
+                <title id="l1-video-capa-tit">Capa do vídeo: a ficha do processo virando quatro caixinhas</title>
+                <rect width="640" height="360" fill="#07164D"/>
+                <text x="40" y="70" class="l1-capa-eyebrow">Introdução à Programação com Python · Lição 1</text>
+                <text x="40" y="122" class="l1-capa-titulo">A ficha do processo</text>
+                <text x="40" y="158" class="l1-capa-sub">Variáveis, tipos e a leitura do erro</text>
+                <g transform="translate(40 200)"><rect width="128" height="44" rx="12" fill="#EDF3FA"/><text x="10" y="18" class="l1-capa-cx">numero_processo</text><text x="10" y="35" class="l1-capa-cx-v">str</text></g>
+                <g transform="translate(180 200)"><rect width="128" height="44" rx="12" fill="#EDF3FA"/><text x="10" y="18" class="l1-capa-cx">nome_parte</text><text x="10" y="35" class="l1-capa-cx-v">str</text></g>
+                <g transform="translate(320 200)"><rect width="128" height="44" rx="12" fill="#EDF3FA"/><text x="10" y="18" class="l1-capa-cx">vara</text><text x="10" y="35" class="l1-capa-cx-v">str</text></g>
+                <g transform="translate(460 200)"><rect width="128" height="44" rx="2" fill="#E9F6EC"/><text x="10" y="18" class="l1-capa-cx">valor_causa</text><text x="10" y="35" class="l1-capa-cx-v">float</text></g>
+                <circle cx="320" cy="304" r="26" fill="#FFFFFF"/><path d="M311 290 L335 304 L311 318 z" fill="#07164D"/>
+              </svg>
+            </div>
+            <div class="button-row"><button type="button" class="btn" data-video-play>Assistir ao vídeo</button></div>
+            <p class="l1-video-estado" data-video-estado role="status" aria-live="polite">O player do YouTube só é carregado quando você clica. Se a rede bloquear o YouTube, use a transcrição ao lado ou o link direto.</p>
+          </div>
+          <div>
+            <div class="caixa"><p>O vídeo conta a história da lição em movimento: a tarde de copiar e colar, a caixinha com nome, a moldura das aspas, a conta das custas e o primeiro erro. Ele <strong>não conta para a conclusão</strong>: tudo o que ele mostra está também nos slides seguintes, onde você vai praticar.</p></div>
+            <details class="l1-transcricao">
+              <summary>Transcrição do vídeo</summary>
+              <ol>
+                <li><strong>O problema.</strong> Na Comarca de Guaraí, a Dalva passa a tarde copiando e colando o mesmo despacho. Muda o número dos autos, muda o nome da parte, e confere tudo de novo. De vez em quando, um nome fica trocado. É essa tarde que este curso vai automatizar.</li>
+                <li><strong>O destino.</strong> O destino é um programa que cabe em uma página. Ele lê a planilha da pauta e escolhe o texto de cada processo. Depois, salva doze despachos do Word em poucos segundos. Hoje construímos a primeira peça: a ficha do processo.</li>
+                <li><strong>O Colab.</strong> O código vai rodar no Google Colab, direto no navegador. Cada bloco é uma célula. O botão de executar roda a célula, e o resultado aparece logo abaixo. Um aviso: o Colab amanhece limpo. Fechou o caderno ou ficou parado, e a memória pode se apagar. Por isso, execute as células de cima para baixo.</li>
+                <li><strong>A caixinha.</strong> Pense na capa do processo no eproc: campos com nome, cada um com um conteúdo. Em Python, cada campo é uma variável: uma caixinha com nome que guarda um valor. O sinal de igual não pergunta nada. Ele guarda.</li>
+                <li><strong>A ficha.</strong> A ficha de um processo são quatro caixinhas. Número do processo, nome da parte, vara e valor da causa. Os nomes dizem o que guardam: minúsculas, com traço baixo no lugar do espaço. Quando você usa o nome, o Python entrega o conteúdo.</li>
+                <li><strong>As aspas.</strong> Repare: três valores estão entre aspas, e um não. As aspas são a moldura do texto. Sem aspas, é número. O número do processo tem dígitos, mas é texto. A pergunta que decide não é "tem dígitos?". É "vou fazer conta com isso?".</li>
+                <li><strong>A conta.</strong> Com o valor da causa, vamos fazer conta. Custas de um por cento sobre o valor da causa. O resultado, 154, fica guardado em outra caixinha. Mude o percentual e execute de novo: o programa refaz o trabalho inteiro.</li>
+                <li><strong>O erro.</strong> Agora, o que você fará sem querer pelo resto do curso: errar. Somar o texto três com o número dois não funciona. O Python para e mostra o traceback: o relatório do erro. Ele se lê como uma certidão: de baixo para cima. A última linha diz o tipo do erro. As de cima apontam a linha. É um diagnóstico, não uma bronca.</li>
+                <li><strong>Sua vez.</strong> Na lição, você monta a ficha com as próprias mãos… …decide o tipo de cada campo, calcula as custas e lê os erros. Depois, leve tudo para o Colab e execute. A Dalva agradece.</li>
+              </ol>
+            </details>
+            <p class="nota" data-video-link-linha>Link direto do vídeo: <a href="https://www.youtube.com/watch?v=Yg9cZWtmTNs" target="_blank" rel="noopener noreferrer">abrir no YouTube (nova janela)</a></p>
+            <p class="ponte"><strong>Próximo passo:</strong> a ideia central da lição num objeto que você já conhece.</p>
+          </div>
+        </div>
+        <div class="slide-rodape"><p class="progresso-slide"><span class="progresso-trilho" role="img" aria-label="Progresso: slide 2 de 16"><span class="progresso-preenchido" style="width:12%"></span></span><span class="progresso-texto">Slide 2 de 16</span></p><div class="slide-nav"><button type="button" class="btn-nav" data-nav-prev><span aria-hidden="true">←</span> Anterior</button><button type="button" class="btn-nav" data-nav-next>Próximo <span aria-hidden="true">→</span></button></div></div>
+      </div>
+    </section>
+
+    <!-- 3 · METÁFORA -->
+    <section class="slide master-split" data-slide="3" aria-labelledby="s3">
+      <div class="slide-inner">
+        <div class="slide-topo"><span class="etapa"><span class="etapa-icone" aria-hidden="true">◆</span>A grande metáfora</span><span class="slide-counter">03 / 16</span></div>
+        <h2 id="s3" tabindex="-1">A caixinha com nome</h2>
+        <div class="duas-colunas">
+          <figure class="figura-licao" aria-labelledby="cap-3" style="--razao-svg:1.364">
+            <svg viewBox="0 0 300 220" role="img" aria-labelledby="cap-3">
+              <rect x="40" y="56" width="220" height="110" rx="14" class="l1-cx l1-cx-str"/>
+              <rect x="40" y="24" width="120" height="30" rx="6" fill="#07164D"/>
+              <text x="100" y="44" text-anchor="middle" class="l1-svg-etiqueta">vara</text>
+              <text x="150" y="118" text-anchor="middle" class="l1-svg-conteudo">“1ª Vara Cível”</text>
+              <text x="164" y="44" class="l1-svg-mini">← o nome (etiqueta)</text>
+              <text x="150" y="150" text-anchor="middle" class="l1-svg-mini">o conteúdo (valor guardado)</text>
+              <text x="150" y="200" text-anchor="middle" class="l1-svg-mini">Pede pelo nome  →  recebe o conteúdo</text>
+            </svg>
+            <figcaption id="cap-3">Uma caixinha com uma etiqueta (“vara”) e um conteúdo dentro (“1ª Vara Cível”). Quem pede pela etiqueta recebe o conteúdo.</figcaption>
+          </figure>
+          <div>
+            <div class="caixa">
+              <p>Na capa do processo no eproc, o campo “Órgão Julgador” tem um rótulo e um conteúdo. Ninguém lê o rótulo quando quer saber a vara: lê o conteúdo.</p>
+              <p>O jeito ingênuo de automatizar seria copiar e colar o conteúdo em cada despacho. O que a programação faz a mais é <strong>dar um nome ao conteúdo uma vez</strong> e, dali em diante, pedir pelo nome.</p>
+              <p><strong>Por quê:</strong> se o conteúdo mudar, você troca em um lugar só e, ao executar a célula de novo, todos os usos acompanham. É o fim do nome trocado no despacho. Atenção: não é fórmula de planilha; nada se atualiza sozinho sem executar de novo.</p>
+            </div>
+            <p class="ponte"><strong>Próximo passo:</strong> conhecer o gabinete onde a falta dessa caixinha custa uma tarde.</p>
+          </div>
+        </div>
+        <div class="slide-rodape"><p class="progresso-slide"><span class="progresso-trilho" role="img" aria-label="Progresso: slide 3 de 16"><span class="progresso-preenchido" style="width:19%"></span></span><span class="progresso-texto">Slide 3 de 16</span></p><div class="slide-nav"><button type="button" class="btn-nav" data-nav-prev><span aria-hidden="true">←</span> Anterior</button><button type="button" class="btn-nav" data-nav-next>Próximo <span aria-hidden="true">→</span></button></div></div>
+      </div>
+    </section>
+
+    <!-- 4 · CENÁRIO -->
+    <section class="slide master-dense" data-slide="4" data-scenario aria-labelledby="s4">
+      <div class="slide-inner">
+        <div class="slide-topo"><span class="etapa"><span class="etapa-icone" aria-hidden="true">◆</span>Cenário fictício</span><span class="slide-counter">04 / 16</span></div>
+        <h2 id="s4" tabindex="-1">Por que a tarde da Dalva some no copiar e colar?</h2>
+        <p>Na Comarca de Guaraí, a <strong>Dalva</strong> é assessora do cartório que atende as três varas da comarca. Toda semana ela prepara os despachos padrão da pauta: abre o modelo, troca o número dos autos, o nome da parte, a vara e o valor, confere e salva. Doze vezes. Quando um nome fica trocado, o erro só aparece depois, no despacho já assinado. A Dalva desconfia de “robô mexendo em processo”, mas quer a tarde de volta. O que se quer é que o computador guarde os dados de cada processo uma vez e os escreva sem errar. Esta lição constrói a primeira peça: a ficha.</p>
+        <div class="card-grid cols-2">
+          <article class="practice-card"><h3>Dados disponíveis</h3><p><strong>Campos da ficha:</strong> número do processo, nome da parte, vara e valor da causa. <strong>Pauta da semana:</strong> 12 processos, das três varas. <strong>Nesta lição:</strong> a primeira ficha da pauta: Ana Ribeiro Nogueira, processo 0004512-33.2026.8.27.0001, 1ª Vara Cível, valor da causa de R$ 15.400,00.</p></article>
+          <article class="practice-card"><h3>Consequências de errar</h3><p>Um dado guardado com o tipo errado pode quebrar a conta (o Python para e avisa) ou, pior, produzir um valor errado sem aviso. <strong>O erro calado custa mais:</strong> ele chega ao despacho.</p></article>
+        </div>
+        <div class="aviso"><strong>Salvaguardas:</strong> perguntar o tipo ao próprio Python com <code>type()</code> · conferir a saída antes de usar · ler a última linha do erro e corrigir um de cada vez · <strong>Não usar</strong> dados reais ou sigilosos de processos em ambientes externos; aqui todos os dados são fictícios.</div>
+        <p class="nota">Cenário fictício criado para aprendizagem. Guaraí é um município real do Tocantins, mas a comarca descrita, as pessoas e os processos são inventados. Os números de processo seguem o formato do CNJ com dígito verificador propositalmente inválido.</p>
+        <p class="ponte"><strong>Próximo passo:</strong> o lugar onde o código da Dalva vai rodar.</p>
+        <div class="slide-rodape"><p class="progresso-slide"><span class="progresso-trilho" role="img" aria-label="Progresso: slide 4 de 16"><span class="progresso-preenchido" style="width:25%"></span></span><span class="progresso-texto">Slide 4 de 16</span></p><div class="slide-nav"><button type="button" class="btn-nav" data-nav-prev><span aria-hidden="true">←</span> Anterior</button><button type="button" class="btn-nav" data-nav-next>Próximo <span aria-hidden="true">→</span></button></div></div>
+      </div>
+    </section>
+
+    <!-- 5 · AMBIENTE -->
+    <section class="slide master-dense" data-slide="5" aria-labelledby="s5">
+      <div class="slide-inner">
+        <div class="slide-topo"><span class="etapa"><span class="etapa-icone" aria-hidden="true">◆</span>O ambiente</span><span class="slide-counter">05 / 16</span></div>
+        <h2 id="s5" tabindex="-1">O Colab: o caderno que amanhece limpo</h2>
+        <div class="duas-colunas">
+          <figure class="figura-licao" aria-labelledby="cap-5">
+            <div class="l1-celula">
+              <div class="l1-celula-linha"><span class="l1-celula-play" aria-hidden="true">▶</span><pre data-codigo="ola">print("Bom dia, Comarca de Guaraí!")</pre></div>
+              <p class="l1-saida-rotulo">Resultado na tela</p>
+              <pre class="l1-saida" data-saida="ola">Bom dia, Comarca de Guaraí!</pre>
+            </div>
+            <figcaption id="cap-5">Uma célula de código do Colab: o botão ▶ à esquerda executa a linha e o resultado aparece logo abaixo da célula.</figcaption>
+          </figure>
+          <div>
+            <div class="termo-def">
+              <p><strong>Notebook</strong> (caderno): o arquivo do Google Colab, que mistura células de texto e células de código e roda no navegador, sem instalar nada.</p>
+              <p><strong>Célula</strong>: cada bloco do caderno. A de código tem o botão ▶ à esquerda; clicar nele (ou Ctrl+Enter) executa a célula.</p>
+            </div>
+            <p>O <code>print()</code> é uma <strong>função</strong>: uma ordem pronta que o Python sabe cumprir. A ordem é “mostre na tela o que está entre os parênteses”. As aspas dizem que o que está dentro é texto. O padrão se repete no curso inteiro: nome da função, parênteses e, dentro deles, o material.</p>
+            <div class="aviso"><strong>Atenção:</strong> o Colab amanhece limpo. Fechou o caderno ou ficou um tempo parado, e as variáveis podem sumir. Execute as células de cima para baixo e, ao reabrir, use <em>Ambiente de execução → Executar tudo</em>.</div>
+            <p class="lt-nota"><span class="marcador m-conceito"><span class="ic" aria-hidden="true">◆</span>O que fazer aqui</span> Apenas compreenda: no slide 8 você escolhe como escrever cada linha da ficha e vê o que o Python faz com ela.</p>
+          </div>
+        </div>
+        <div class="slide-rodape"><p class="progresso-slide"><span class="progresso-trilho" role="img" aria-label="Progresso: slide 5 de 16"><span class="progresso-preenchido" style="width:31%"></span></span><span class="progresso-texto">Slide 5 de 16</span></p><div class="slide-nav"><button type="button" class="btn-nav" data-nav-prev><span aria-hidden="true">←</span> Anterior</button><button type="button" class="btn-nav" data-nav-next>Próximo <span aria-hidden="true">→</span></button></div></div>
+      </div>
+    </section>
+
+    <!-- 6 · CONCEITO 1 DE 3: VARIÁVEL -->
+    <section class="slide master-dense" data-slide="6" data-vocabulary aria-labelledby="s6">
+      <div class="slide-inner">
+        <div class="slide-topo"><span class="etapa"><span class="etapa-icone" aria-hidden="true">◆</span>Conceito · 1 de 3</span><span class="slide-counter">06 / 16</span></div>
+        <h2 id="s6" tabindex="-1">Variável: a caixinha com nome</h2>
+        <div class="duas-colunas">
+          <figure class="figura-licao" aria-labelledby="cap-6">
+            <div class="bloco-codigo"><div class="codigo-topo"><span class="badge">Célula · a ficha de um processo</span></div>
+<pre data-codigo="ficha"># A ficha de UM processo
+numero_processo = "0004512-33.2026.8.27.0001"
+nome_parte = "Ana Ribeiro Nogueira"
+vara = "1ª Vara Cível"
+valor_causa = 15400.00
+
+print(nome_parte, "—", numero_processo)</pre></div>
+            <p class="l1-saida-rotulo">Resultado na tela</p>
+            <pre class="l1-saida" data-saida="ficha">Ana Ribeiro Nogueira — 0004512-33.2026.8.27.0001</pre>
+            <figcaption id="cap-6">Quatro linhas criam quatro caixinhas; a última pede ao <code>print()</code> o conteúdo de duas delas. Como <code>nome_parte</code> está sem aspas no <code>print</code>, sai o nome da parte, não a palavra “nome_parte”.</figcaption>
+          </figure>
+          <div>
+            <div class="termo-def">
+              <p><strong>Variável</strong>: uma caixinha com nome que guarda um valor. Ela nasce quando recebe o primeiro valor. No cenário: <code>vara = "1ª Vara Cível"</code>.</p>
+              <p><strong>Atribuição</strong>: o gesto de guardar. O sinal <code>=</code> não pergunta se os lados são iguais; ele põe o valor da direita na caixinha da esquerda.</p>
+            </div>
+            <p>Os nomes contam a história do que guardam. Neste curso, tudo em minúsculas e com traço baixo no lugar do espaço, o estilo <strong>snake_case</strong>: <code>valor_causa</code>, não <code>v</code> nem <code>x</code>.</p>
+            <ul class="key-list">
+              <li><strong>Espaço é proibido:</strong> <code>nome parte = "Ana Ribeiro"</code> dá <code data-erro="erro_espaco">SyntaxError: invalid syntax</code>: erro de sintaxe, a linha fere a gramática do Python e nada é executado (o slide 9 ensina a ler essas mensagens).</li>
+              <li><strong>Maiúsculas contam:</strong> depois de criar <code>vara</code>, pedir <code>print(Vara)</code> dá <code data-erro="maiusculas">NameError: name 'Vara' is not defined. Did you mean: 'vara'?</code>: erro de nome, não existe caixinha chamada <code>Vara</code>.</li>
+              <li><strong>Acentos, evite</strong> (<code>numero</code>, não <code>número</code>) e não use palavras que o Python reserva para si, como <code>if</code>, <code>for</code> e <code>def</code>.</li>
+            </ul>
+            <p class="lt-nota"><span class="marcador m-conceito"><span class="ic" aria-hidden="true">◆</span>O que fazer aqui</span> Compreenda e compare: leia cada linha da célula como “guarde isto nesta caixinha”.</p>
+          </div>
+        </div>
+        <div class="slide-rodape"><p class="progresso-slide"><span class="progresso-trilho" role="img" aria-label="Progresso: slide 6 de 16"><span class="progresso-preenchido" style="width:38%"></span></span><span class="progresso-texto">Slide 6 de 16</span></p><div class="slide-nav"><button type="button" class="btn-nav" data-nav-prev><span aria-hidden="true">←</span> Anterior</button><button type="button" class="btn-nav" data-nav-next>Próximo <span aria-hidden="true">→</span></button></div></div>
+      </div>
+    </section>
+
+    <!-- 7 · CONCEITO 2 DE 3 + EXEMPLO RESOLVIDO: TIPO -->
+    <section class="slide master-dense" data-slide="7" aria-labelledby="s7">
+      <div class="slide-inner">
+        <div class="slide-topo"><span class="etapa"><span class="etapa-icone" aria-hidden="true">◆</span>Conceito · 2 de 3</span><span class="slide-counter">07 / 16</span></div>
+        <h2 id="s7" tabindex="-1">Tipo: a moldura das aspas</h2>
+        <div class="duas-colunas">
+          <figure class="figura-licao" aria-labelledby="cap-7" style="--razao-svg:1.07">
+            <svg viewBox="0 0 320 300" role="img" aria-labelledby="cap-7">
+              <g transform="translate(14 14)"><rect class="l1-cx l1-cx-str" width="140" height="46" rx="12"/><text class="l1-cx-nome" x="10" y="17">numero_processo</text><text class="l1-cx-tipo" x="132" y="17" text-anchor="end">str</text><text class="l1-cx-valor" x="70" y="36" text-anchor="middle">“0004512-33…”</text></g>
+              <g transform="translate(166 14)"><rect class="l1-cx l1-cx-str" width="140" height="46" rx="12"/><text class="l1-cx-nome" x="10" y="17">nome_parte</text><text class="l1-cx-tipo" x="132" y="17" text-anchor="end">str</text><text class="l1-cx-valor" x="70" y="36" text-anchor="middle">“Ana Ribeiro…”</text></g>
+              <g transform="translate(14 72)"><rect class="l1-cx l1-cx-str" width="140" height="46" rx="12"/><text class="l1-cx-nome" x="10" y="17">vara</text><text class="l1-cx-tipo" x="132" y="17" text-anchor="end">str</text><text class="l1-cx-valor" x="70" y="36" text-anchor="middle">“1ª Vara Cível”</text></g>
+              <g transform="translate(166 72)"><rect class="l1-cx l1-cx-float" width="140" height="46" rx="2"/><text class="l1-cx-nome" x="10" y="17">valor_causa</text><text class="l1-cx-tipo" x="132" y="17" text-anchor="end">float</text><text class="l1-cx-valor" x="70" y="36" text-anchor="middle">15400.00</text></g>
+              <text x="160" y="152" text-anchor="middle" class="l1-svg-conta">custas = valor_causa * 0.01</text>
+              <path d="M236 122 L200 140" stroke="#1F6B3B" stroke-width="2" fill="none" marker-end="url(#seta7)"/>
+              <defs><marker id="seta7" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#1F6B3B"/></marker></defs>
+              <path d="M160 160 V180" stroke="#07164D" stroke-width="2" marker-end="url(#seta1b)"/>
+              <defs><marker id="seta1b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#07164D"/></marker></defs>
+              <g transform="translate(90 188)"><rect class="l1-cx l1-cx-float" width="140" height="46" rx="2"/><text class="l1-cx-nome" x="10" y="17">custas</text><text class="l1-cx-tipo" x="132" y="17" text-anchor="end">float</text><text class="l1-cx-valor" x="70" y="36" text-anchor="middle" data-saida-svg="custas">154.0</text></g>
+              <text x="160" y="262" text-anchor="middle" class="l1-svg-mini">Com aspas: texto (str). Sem aspas: número (float).</text>
+              <text x="160" y="282" text-anchor="middle" class="l1-svg-mini">Só a caixinha de número entra na conta.</text>
+            </svg>
+            <figcaption id="cap-7">As três caixinhas de texto têm borda arredondada, aspas e rótulo <code>str</code>; a do valor da causa tem canto reto e rótulo <code>float</code>. Só ela entra na conta das custas, cujo resultado vai para uma quinta caixinha, também <code>float</code>.</figcaption>
+          </figure>
+          <div>
+            <div class="termo-def">
+              <p><strong>Tipo</strong>: a natureza do dado. Três resolvem quase tudo no curso: <strong><code>str</code></strong> (texto, sempre entre aspas: nomes, número dos autos), <strong><code>int</code></strong> (inteiro, sem casa decimal: dias de prazo, quantidade de processos) e <strong><code>float</code></strong> (decimal, escrito com ponto, não vírgula: valores em reais).</p>
+              <p><strong>A regra:</strong> a pergunta que decide não é “tem dígitos?”, e sim “<strong>vou fazer conta com isso?</strong>”. Ninguém soma números de processo: texto. O valor da causa entra nas custas: decimal.</p>
+              <p class="origem-numero"><strong>De onde vêm os números:</strong> <code>custas = valor_causa * 0.01</code> faz 15.400,00 × 0,01 = 154,00, e <code>print("Custas iniciais: R$", custas)</code> mostra <code data-saida="custas">Custas iniciais: R$ 154.0</code>, com uma casa decimal (as duas casas do dinheiro chegam na lição 4). Trocando para 2%, sai <code data-saida="custas_2pct">Custas iniciais: R$ 308.0</code>.</p>
+            </div>
+            <p><strong>Perguntar o tipo:</strong> <code>print(type(nome_parte))</code> responde <code>&lt;class 'str'&gt;</code> (sem o <code>print</code>, o Colab mostra só <code>str</code>). <strong>Converter:</strong> quando o dado chega como texto, a função com o nome do tipo de destino transforma. Com <code>valor_numero = float("1500")</code>, a linha <code>print(valor_numero, type(valor_numero))</code> mostra <code data-saida="conversao">1500.0 &lt;class 'float'&gt;</code>; <code>int("3")</code> dá 3; <code>str(154.0)</code> faz o caminho inverso.</p>
+            <p><strong>Os sinais de conta:</strong> <code>+</code> soma, <code>-</code> subtrai, <code>*</code> multiplica, <code>/</code> divide. O <code>%</code> <strong>não</strong> quer dizer “por cento”: é o resto da divisão (<code>print(17 % 5)</code> mostra <code data-saida="resto">2</code>). Por isso 1% se escreve <code>0.01</code>.</p>
+            <p class="lt-nota"><span class="marcador m-conceito"><span class="ic" aria-hidden="true">◆</span>O que fazer aqui</span> Apenas compreenda: no próximo slide você monta a ficha e calcula as custas.</p>
+          </div>
+        </div>
+        <div class="slide-rodape"><p class="progresso-slide"><span class="progresso-trilho" role="img" aria-label="Progresso: slide 7 de 16"><span class="progresso-preenchido" style="width:44%"></span></span><span class="progresso-texto">Slide 7 de 16</span></p><div class="slide-nav"><button type="button" class="btn-nav" data-nav-prev><span aria-hidden="true">←</span> Anterior</button><button type="button" class="btn-nav" data-nav-next>Próximo <span aria-hidden="true">→</span></button></div></div>
+      </div>
+    </section>
+
+    <!-- 8 · PRÁTICA MANIPULÁVEL: OFICINA DA FICHA -->
+    <section class="slide master-dense" data-slide="8" aria-labelledby="s8">
+      <div class="slide-inner">
+        <div class="slide-topo"><span class="etapa"><span class="etapa-icone" aria-hidden="true">●</span>Prática</span><span class="slide-counter">08 / 16</span></div>
+        <h2 id="s8" tabindex="-1">Sua vez: monte a ficha e calcule as custas</h2>
+        <div class="instrucao"><p class="instrucao-titulo"><span aria-hidden="true">→</span> Como fazer</p><ul><li><strong>O que fazer:</strong> escolha como escrever cada campo da ficha da Ana e a taxa das custas. Cada escolha é uma linha de código de verdade.</li><li><strong>Quanto falta:</strong> o painel mostra o tipo que o Python deu a cada campo, ou o erro que ele acusou, e o que saiu na conta.</li><li><strong>Quando está completo:</strong> os três campos de texto como <code>str</code>, o valor como <code>float</code> e custas iguais a <code>154.0</code>. Mudar uma escolha reavalia o requisito.</li></ul></div>
+        <div class="sim-bloco" data-simulador="l1-oficina">
+          <figure class="figura-licao" aria-labelledby="cap-8">
+            <svg viewBox="0 0 320 250" role="img" aria-labelledby="cap-8" data-l1-oficina-figura>
+              <g data-l1-caixa="numero_processo" transform="translate(14 10)"><rect class="l1-cx l1-cx-vazia" width="140" height="50" rx="8"/><text class="l1-cx-nome" x="10" y="18">numero_processo</text><text class="l1-cx-tipo" x="132" y="18" text-anchor="end" data-l1-tipo>?</text><text class="l1-cx-valor" x="70" y="40" text-anchor="middle" data-l1-valor>(vazia)</text></g>
+              <g data-l1-caixa="nome_parte" transform="translate(166 10)"><rect class="l1-cx l1-cx-vazia" width="140" height="50" rx="8"/><text class="l1-cx-nome" x="10" y="18">nome_parte</text><text class="l1-cx-tipo" x="132" y="18" text-anchor="end" data-l1-tipo>?</text><text class="l1-cx-valor" x="70" y="40" text-anchor="middle" data-l1-valor>(vazia)</text></g>
+              <g data-l1-caixa="vara" transform="translate(14 72)"><rect class="l1-cx l1-cx-vazia" width="140" height="50" rx="8"/><text class="l1-cx-nome" x="10" y="18">vara</text><text class="l1-cx-tipo" x="132" y="18" text-anchor="end" data-l1-tipo>?</text><text class="l1-cx-valor" x="70" y="40" text-anchor="middle" data-l1-valor>(vazia)</text></g>
+              <g data-l1-caixa="valor_causa" transform="translate(166 72)"><rect class="l1-cx l1-cx-vazia" width="140" height="50" rx="8"/><text class="l1-cx-nome" x="10" y="18">valor_causa</text><text class="l1-cx-tipo" x="132" y="18" text-anchor="end" data-l1-tipo>?</text><text class="l1-cx-valor" x="70" y="40" text-anchor="middle" data-l1-valor>(vazia)</text></g>
+              <text x="160" y="152" text-anchor="middle" class="l1-svg-conta" data-l1-conta>custas = valor_causa * ?</text>
+              <g data-l1-caixa="custas" transform="translate(90 166)"><rect class="l1-cx l1-cx-vazia" width="140" height="50" rx="8"/><text class="l1-cx-nome" x="10" y="18">custas</text><text class="l1-cx-tipo" x="132" y="18" text-anchor="end" data-l1-tipo>?</text><text class="l1-cx-valor" x="70" y="40" text-anchor="middle" data-l1-valor>(vazia)</text></g>
+              <text x="160" y="240" text-anchor="middle" class="l1-svg-mini">Borda tracejada com ✕: o Python acusou erro nessa linha.</text>
+            </svg>
+            <figcaption id="cap-8">A ficha reage às suas escolhas: caixinha de texto com borda arredondada e rótulo <code>str</code>; número decimal com canto reto e rótulo <code>float</code>; outro tipo com o rótulo que o Python devolveu; erro com borda tracejada e ✕. O resultado de cada linha foi obtido executando o Python de verdade.</figcaption>
+          </figure>
+          <div class="sim-controles">
+            <label for="l1-of-numero"><span>numero_processo =</span><select id="l1-of-numero" data-save data-l1-campo="numero_processo"><option value="">Escolha…</option><option value="&quot;0004512-33.2026.8.27.0001&quot;">"0004512-33.2026.8.27.0001"</option><option value="0004512-33.2026.8.27.0001">0004512-33.2026.8.27.0001</option></select></label>
+            <label for="l1-of-nome"><span>nome_parte =</span><select id="l1-of-nome" data-save data-l1-campo="nome_parte"><option value="">Escolha…</option><option value="Ana Ribeiro Nogueira">Ana Ribeiro Nogueira</option><option value="&quot;Ana Ribeiro Nogueira&quot;">"Ana Ribeiro Nogueira"</option></select></label>
+            <label for="l1-of-vara"><span>vara =</span><select id="l1-of-vara" data-save data-l1-campo="vara"><option value="">Escolha…</option><option value="&quot;1ª Vara Cível&quot;">"1ª Vara Cível"</option><option value="1ª Vara Cível">1ª Vara Cível</option></select></label>
+            <label for="l1-of-valor"><span>valor_causa =</span><select id="l1-of-valor" data-save data-l1-campo="valor_causa"><option value="">Escolha…</option><option value="&quot;15400.00&quot;">"15400.00"</option><option value="15.400,00">15.400,00</option><option value="15400.00">15400.00</option></select></label>
+            <label for="l1-of-taxa"><span>custas = valor_causa *</span><select id="l1-of-taxa" data-save data-l1-campo="taxa"><option value="">Escolha…</option><option value="1%">1%</option><option value="0.01">0.01</option><option value="&quot;0.01&quot;">"0.01"</option></select></label>
+            <div class="bloco-codigo"><div class="codigo-topo"><span class="badge">O código que você montou</span></div><pre data-l1-codigo>(escolha os campos)</pre></div>
+            <div class="sim-result" data-sim-result role="status" aria-live="polite">Escolha como escrever cada campo. O painel diz o que o Python fez com cada linha.</div>
+            <input type="hidden" id="l1-oficina-valida" data-save data-required data-correct-value="sim" data-requirement-label="Montar a ficha com os tipos certos e custas de 154.0 (slide 8)">
+          </div>
+        </div>
+        <div class="slide-rodape"><p class="progresso-slide"><span class="progresso-trilho" role="img" aria-label="Progresso: slide 8 de 16"><span class="progresso-preenchido" style="width:50%"></span></span><span class="progresso-texto">Slide 8 de 16</span></p><div class="slide-nav"><button type="button" class="btn-nav" data-nav-prev><span aria-hidden="true">←</span> Anterior</button><button type="button" class="btn-nav" data-nav-next>Próximo <span aria-hidden="true">→</span></button></div></div>
+      </div>
+    </section>
+
+    <!-- 9 · CONCEITO 3 DE 3 + QUIZ 1: TRACEBACK -->
+    <section class="slide master-dense" data-slide="9" aria-labelledby="s9">
+      <div class="slide-inner">
+        <div class="slide-topo"><span class="etapa"><span class="etapa-icone" aria-hidden="true">◆</span>Conceito · 3 de 3</span><span class="slide-counter">09 / 16</span></div>
+        <h2 id="s9" tabindex="-1">Traceback: a certidão lida de baixo para cima</h2>
+        <div class="duas-colunas">
+          <figure class="figura-licao" aria-labelledby="cap-9">
+            <div class="bloco-codigo errado"><div class="codigo-topo"><span class="badge">Célula com erro</span></div><pre data-codigo="erro_texto_mais_numero">idade_processo = "3" + 2</pre></div>
+            <div class="l1-traceback" data-traceback="erro_texto_mais_numero">
+              <pre class="l1-tb-cima">Traceback (most recent call last):
+  File "&lt;string&gt;", line 1, in &lt;module&gt;</pre>
+              <pre class="l1-tb-ultima">TypeError: can only concatenate str (not "int") to str</pre>
+            </div>
+            <figcaption id="cap-9">O traceback real dessa linha. As linhas de cima dizem onde (linha 1); a última, destacada com borda tracejada, diz o quê: <code>TypeError</code>, texto não se junta a número. No Colab, o cabeçalho tem outro formato e pode repetir o tipo do erro no alto; a última linha continua trazendo o tipo e a mensagem.</figcaption>
+          </figure>
+          <div>
+            <div class="termo-def"><p><strong>Traceback</strong> (rastreamento): o relatório que o Python mostra quando para por erro. Lê-se como uma certidão, <strong>de baixo para cima</strong>: a última linha traz o tipo do erro e um resumo; as de cima apontam o arquivo e a linha.</p></div>
+            <ul class="key-list">
+              <li><code>SyntaxError</code> (erro de sintaxe): o código fere a gramática e nem chega a rodar. <code>nome parte = "Ana"</code> → espaço no nome.</li>
+              <li><code>NameError</code> (erro de nome): o Python procurou uma caixinha que não existe. <code>nome_parte = Ana</code>, sem aspas → <code data-erro="erro_sem_aspas">NameError: name 'Ana' is not defined. Did you mean: 'any'?</code> (o “Did you mean” é só um palpite do Python, e aqui ele erra; no Colab ele pode nem aparecer).</li>
+              <li><code>TypeError</code> (erro de tipo): operação entre tipos que não combinam. Correção do exemplo: converter antes, <code>int("3") + 2</code>, que dá <code data-saida="conserto_texto_mais_numero">5</code>.</li>
+            </ul>
+            <p class="nota">A rotina diante do erro: respirar, ler a última linha, achar a linha apontada, corrigir <strong>um erro de cada vez</strong> e executar de novo.</p>
+          </div>
+        </div>
+        <div class="instrucao"><p class="instrucao-titulo"><span aria-hidden="true">→</span> Como fazer</p><ul><li><strong>O que fazer:</strong> leia a última linha do traceback abaixo e diga o que ela diagnostica.</li><li><strong>Quanto falta:</strong> uma escolha; dá para tentar de novo sem penalidade.</li><li><strong>Quando está completo:</strong> quando o retorno marca “Correto” e você sabe dizer por quê.</li></ul></div>
+        <div data-quiz data-required data-interaction-id="l1-q1" data-correct-response="B" data-requirement-label="Diagnosticar o TypeError das custas pela última linha do traceback (slide 9)">
+          <p><strong>A Dalva escreveu <code>valor_causa = "18250.00"</code> e, na linha seguinte, <code>custas = valor_causa * 0.01</code>. A última linha do traceback diz <code data-erro="texto_vezes_decimal">TypeError: can't multiply sequence by non-int of type 'float'</code>. O que aconteceu?</strong></p>
+          <div class="quiz-options">
+            <button type="button" class="quiz-option" data-answer="A" data-incorrect-feedback="Pôr aspas em 0.01 piora: texto vezes texto também é TypeError (“can't multiply sequence by non-int of type 'str'”). Quem precisa mudar é o valor da causa."><span class="quiz-letra" aria-hidden="true">A</span><span class="quiz-corpo"><span class="quiz-texto">Faltaram aspas no 0.01: para multiplicar, as duas partes precisam estar entre aspas.</span><span class="quiz-porque" data-porque hidden><strong>Por quê:</strong> pôr aspas em 0.01 piora: texto vezes texto também é TypeError (“can't multiply sequence by non-int of type 'str'”). Quem precisa mudar é o valor da causa.</span></span></button>
+            <button type="button" class="quiz-option" data-answer="B" data-correct data-correct-feedback="Correto: as aspas fizeram de &quot;18250.00&quot; um texto, e texto não se multiplica por decimal. Convertendo antes, float(valor_causa) * 0.01 dá 182.5."><span class="quiz-letra" aria-hidden="true">B</span><span class="quiz-corpo"><span class="quiz-texto">As aspas guardaram o valor como texto; é preciso convertê-lo com <code>float()</code> antes da conta.</span><span class="quiz-porque" data-porque hidden><strong>Por quê:</strong> as aspas fizeram de "18250.00" um texto, e texto não se multiplica por decimal. Convertendo antes, <code>float(valor_causa) * 0.01</code> dá <code data-saida="conserto_texto_vezes_decimal">182.5</code>.</span></span></button>
+            <button type="button" class="quiz-option" data-answer="C" data-incorrect-feedback="Nome errado daria NameError, e a última linha diz TypeError. O Python achou a caixinha; o problema é o tipo do que está dentro dela."><span class="quiz-letra" aria-hidden="true">C</span><span class="quiz-corpo"><span class="quiz-texto">O nome <code>valor_causa</code> foi digitado errado e o Python não achou a caixinha.</span><span class="quiz-porque" data-porque hidden><strong>Por quê:</strong> nome errado daria NameError, e a última linha diz TypeError. O Python achou a caixinha; o problema é o tipo do que está dentro dela.</span></span></button>
+            <button type="button" class="quiz-option" data-answer="D" data-incorrect-feedback="É o contrário: as linhas de cima dizem onde, e a última diz o quê. Ler de cima para baixo e ignorar a última linha esconde o diagnóstico."><span class="quiz-letra" aria-hidden="true">D</span><span class="quiz-corpo"><span class="quiz-texto">A última linha só repete o erro; o diagnóstico de verdade está na primeira linha do traceback.</span><span class="quiz-porque" data-porque hidden><strong>Por quê:</strong> é o contrário: as linhas de cima dizem onde, e a última diz o quê. Ler de cima para baixo e ignorar a última linha esconde o diagnóstico.</span></span></button>
+          </div>
+          <div class="quiz-feedback" data-feedback role="status" aria-live="polite">Escolha uma alternativa: o retorno explica por que ela está correta ou incorreta.</div>
+        </div>
+        <div class="slide-rodape"><p class="progresso-slide"><span class="progresso-trilho" role="img" aria-label="Progresso: slide 9 de 16"><span class="progresso-preenchido" style="width:56%"></span></span><span class="progresso-texto">Slide 9 de 16</span></p><div class="slide-nav"><button type="button" class="btn-nav" data-nav-prev><span aria-hidden="true">←</span> Anterior</button><button type="button" class="btn-nav" data-nav-next>Próximo <span aria-hidden="true">→</span></button></div></div>
+      </div>
+    </section>
+
+    <!-- 10 · O MUNDO REAL + QUIZ 2 -->
+    <section class="slide master-dense" data-slide="10" aria-labelledby="s10">
+      <div class="slide-inner">
+        <div class="slide-topo"><span class="etapa"><span class="etapa-icone" aria-hidden="true">◆</span>O mundo real</span><span class="slide-counter">10 / 16</span></div>
+        <h2 id="s10" tabindex="-1">E se o valor chegar do sistema como “15.400,00”?</h2>
+        <p>Na vida real, a Dalva não digita o valor: ela o copia da planilha de controle da secretaria, preenchida no formato brasileiro, com ponto no milhar e vírgula nos centavos; copiado, o valor chega como texto. A conversão direta recusa: <code>float("15.400,00")</code> dá <code data-erro="real_float_direto">ValueError: could not convert string to float: '15.400,00'</code>. <strong>ValueError</strong> (erro de valor) quer dizer que o tipo até serve para a conversão, mas o conteúdo não tem o formato que ela espera.</p>
+        <div class="lado-a-lado">
+          <article class="lado-risco">
+            <h3><span class="marcador m-risco"><span class="ic" aria-hidden="true">✕</span>Lado A</span> Tirar as aspas e seguir</h3>
+            <div class="bloco-codigo errado"><pre data-codigo="real_sem_aspas">valor_causa = 15.400,00
+print(valor_causa, type(valor_causa))</pre></div>
+            <pre class="l1-saida" data-saida="real_sem_aspas">(15.4, 0) &lt;class 'tuple'&gt;</pre>
+            <p>O Python <strong>não reclama</strong>: leu a vírgula como separador e guardou um par de números, 15.4 e 0. A conta das custas só quebra depois, com <code data-erro="real_sem_aspas_custas">TypeError: can't multiply sequence by non-int of type 'float'</code>, longe da causa. É o erro calado do cenário.</p>
+          </article>
+          <article class="lado-correto">
+            <h3><span class="marcador m-correto"><span class="ic" aria-hidden="true">✓</span>Lado B</span> Tratar o texto e converter</h3>
+            <div class="bloco-codigo certo"><pre data-codigo="real_tratado">texto = "15.400,00"
+valor_causa = float(texto.replace(".", "").replace(",", "."))
+print(valor_causa, type(valor_causa))
+print(valor_causa * 0.01)</pre></div>
+            <pre class="l1-saida" data-saida="real_tratado">15400.0 &lt;class 'float'&gt;
+154.0</pre>
+            <p>Tira-se o ponto do milhar, troca-se a vírgula por ponto e só então se converte. A ficha da Dalva faz isso <strong>uma vez</strong>, na entrada, antes de qualquer conta. O verbo <code>.replace()</code> é tema da lição 4; aqui basta ler o que ele faz.</p>
+          </article>
+        </div>
+        <p class="nota">É a mesma pergunta do slide 7 (“vou fazer conta com isso?”), agora com o dado vindo de fora. Dado que chega de sistema, planilha ou digitação chega quase sempre como texto.</p>
+        <div class="instrucao"><p class="instrucao-titulo"><span aria-hidden="true">→</span> Como fazer</p><ul><li><strong>O que fazer:</strong> critique a proposta da Dalva pensando nos próximos doze processos.</li><li><strong>Quanto falta:</strong> uma escolha; dá para tentar de novo sem penalidade.</li><li><strong>Quando está completo:</strong> quando o retorno marca “Correto”.</li></ul></div>
+        <div data-quiz data-required data-interaction-id="l1-q2" data-correct-response="C" data-requirement-label="Escolher o tratamento certo para o valor com vírgula (slide 10)">
+          <p><strong>A Dalva propõe: “Tiro as aspas, o Python aceitou sem erro, então está certo.” O que você responde a ela?</strong></p>
+          <div class="quiz-options">
+            <button type="button" class="quiz-option" data-answer="A" data-incorrect-feedback="Aceitar sem erro não é estar certo: sem aspas, 15.400,00 vira o par (15.4, 0), e a conta quebra adiante. Conferir o tipo com type() denunciaria."><span class="quiz-letra" aria-hidden="true">A</span><span class="quiz-corpo"><span class="quiz-texto">Concordo: se o Python aceitou sem erro, o valor ficou guardado como número.</span><span class="quiz-porque" data-porque hidden><strong>Por quê:</strong> aceitar sem erro não é estar certo: sem aspas, 15.400,00 vira o par (15.4, 0), e a conta quebra adiante. Conferir o tipo com <code>type()</code> denunciaria.</span></span></button>
+            <button type="button" class="quiz-option" data-answer="B" data-incorrect-feedback="float() não entende o formato brasileiro: float(&quot;15.400,00&quot;) dá ValueError. O ponto e a vírgula precisam ser tratados antes."><span class="quiz-letra" aria-hidden="true">B</span><span class="quiz-corpo"><span class="quiz-texto">Use <code>float("15.400,00")</code> direto: a conversão entende o formato brasileiro.</span><span class="quiz-porque" data-porque hidden><strong>Por quê:</strong> <code>float()</code> não entende o formato brasileiro: <code>float("15.400,00")</code> dá ValueError. O ponto e a vírgula precisam ser tratados antes.</span></span></button>
+            <button type="button" class="quiz-option" data-answer="C" data-correct data-correct-feedback="Correto: tratar o texto e depois converter dá 15400.0 e custas de 154.0, e o tratamento vale para todos os processos que chegarem do sistema."><span class="quiz-letra" aria-hidden="true">C</span><span class="quiz-corpo"><span class="quiz-texto">Trate o ponto e a vírgula do texto antes de converter com <code>float()</code>.</span><span class="quiz-porque" data-porque hidden><strong>Por quê:</strong> tratar o texto e depois converter dá 15400.0 e custas de 154.0, e o tratamento vale para todos os processos que chegarem do sistema.</span></span></button>
+            <button type="button" class="quiz-option" data-answer="D" data-incorrect-feedback="Sem ponto nem vírgula, 15.400,00 vira 1540000: cem vezes o valor. E, mesmo digitando certo, volta a digitação manual que o curso quer eliminar."><span class="quiz-letra" aria-hidden="true">D</span><span class="quiz-corpo"><span class="quiz-texto">Digite de novo cada valor à mão, sem ponto nem vírgula, em vez de copiar do sistema.</span><span class="quiz-porque" data-porque hidden><strong>Por quê:</strong> sem ponto nem vírgula, 15.400,00 vira 1540000, e <code>1540000 / 15400.00</code> dá <code data-saida="sem_pontuacao">100.0</code>: cem vezes o valor. E, mesmo digitando certo, volta a digitação manual que o curso quer eliminar.</span></span></button>
+          </div>
+          <div class="quiz-feedback" data-feedback role="status" aria-live="polite">Escolha uma alternativa.</div>
+        </div>
+        <div class="slide-rodape"><p class="progresso-slide"><span class="progresso-trilho" role="img" aria-label="Progresso: slide 10 de 16"><span class="progresso-preenchido" style="width:62%"></span></span><span class="progresso-texto">Slide 10 de 16</span></p><div class="slide-nav"><button type="button" class="btn-nav" data-nav-prev><span aria-hidden="true">←</span> Anterior</button><button type="button" class="btn-nav" data-nav-next>Próximo <span aria-hidden="true">→</span></button></div></div>
+      </div>
+    </section>
+
+    <!-- 11 · LIMITE -->
+    <section class="slide master-dense" data-slide="11" aria-labelledby="s11">
+      <div class="slide-inner">
+        <div class="slide-topo"><span class="etapa"><span class="etapa-icone" aria-hidden="true">▲</span>Limite</span><span class="slide-counter">11 / 16</span></div>
+        <h2 id="s11" tabindex="-1">Quando caixinhas soltas não dão conta</h2>
+        <p>Até aqui, uma ficha. Voltamos à pauta inteira da Dalva: <strong>12 processos</strong>, cada um com as mesmas 4 caixinhas. Sem outra ferramenta, cada caixinha ganha um número no nome: <code>nome_parte_1</code>, <code>nome_parte_2</code>…</p>
+        <div class="duas-colunas">
+          <figure class="figura-licao" aria-labelledby="cap-11">
+            <div class="l1-grade" data-l1-grade aria-hidden="true"></div>
+            <figcaption id="cap-11" data-l1-grade-legenda>12 processos da pauta, 4 variáveis soltas por processo: 48 caixinhas, de <code>numero_processo_1</code> a <code>valor_causa_12</code>.</figcaption>
+          </figure>
+          <div>
+            <div class="button-row"><button type="button" class="btn btn-secundario" data-demo="limite-mais">Acrescentar um processo</button><button type="button" class="btn btn-secundario" data-demo="limite-volta">Voltar a 1 processo</button></div>
+            <div class="sim-result" data-demo-result="limite" role="status" aria-live="polite">12 processos × 4 campos = 48 variáveis soltas.</div>
+            <div class="caixa"><p>Com 12 processos são <strong>12 × 4 = 48 variáveis</strong>. Não é falta de jeito: variáveis soltas não dizem que <code>nome_parte_7</code> e <code>vara_7</code> pertencem ao mesmo processo. Um número errado no nome e o despacho sai com a parte de um processo e a vara de outro: o mesmo nome trocado que a Dalva quer eliminar.</p></div>
+            <p class="ponte"><strong>Próximo passo:</strong> como guardar a ficha inteira numa coisa só?</p>
+          </div>
+        </div>
+        <div class="slide-rodape"><p class="progresso-slide"><span class="progresso-trilho" role="img" aria-label="Progresso: slide 11 de 16"><span class="progresso-preenchido" style="width:69%"></span></span><span class="progresso-texto">Slide 11 de 16</span></p><div class="slide-nav"><button type="button" class="btn-nav" data-nav-prev><span aria-hidden="true">←</span> Anterior</button><button type="button" class="btn-nav" data-nav-next>Próximo <span aria-hidden="true">→</span></button></div></div>
+      </div>
+    </section>
+
+    <!-- 12 · NOVA PERSPECTIVA + QUIZ 3 -->
+    <section class="slide master-dense" data-slide="12" aria-labelledby="s12">
+      <div class="slide-inner">
+        <div class="slide-topo"><span class="etapa"><span class="etapa-icone" aria-hidden="true">◆</span>Mudando a perspectiva</span><span class="slide-counter">12 / 16</span></div>
+        <h2 id="s12" tabindex="-1">Cada processo, uma capa</h2>
+        <div class="duas-colunas">
+          <div>
+            <div class="caixa"><p>No eproc, ninguém procura 48 campos soltos: cada processo tem a sua capa, com os seus campos juntos. Em Python, essa capa existe e se chama <strong>dicionário</strong>. Ela guarda a ficha inteira numa variável só, e cada campo continua com o seu nome.</p><p>No dicionário, cada campo continua com o seu nome, mas a forma de pedir muda um pouco (o nome do campo vai entre colchetes e aspas); isso fica para a lição 3. Com as caixinhas soltas desta lição vale a regra: <strong>pede-se pelo nome, sem aspas</strong>, e recebe-se o conteúdo.</p></div>
+          </div>
+          <figure class="figura-licao" aria-labelledby="cap-12" style="--razao-svg:1.6">
+            <svg viewBox="0 0 320 200" role="img" aria-labelledby="cap-12">
+              <rect x="22" y="58" width="170" height="130" rx="8" fill="#FFFFFF" stroke="#CBD5E1"/>
+              <text x="40" y="82" class="l1-svg-titulo">processo</text>
+              <g transform="translate(36 92)"><rect class="l1-cx l1-cx-str" width="70" height="38" rx="10"/><text class="l1-cx-nome" x="6" y="15">numero_…</text><text class="l1-cx-tipo" x="64" y="31" text-anchor="end">str</text></g>
+              <g transform="translate(112 92)"><rect class="l1-cx l1-cx-str" width="70" height="38" rx="10"/><text class="l1-cx-nome" x="6" y="15">nome_parte</text><text class="l1-cx-tipo" x="64" y="31" text-anchor="end">str</text></g>
+              <g transform="translate(36 138)"><rect class="l1-cx l1-cx-str" width="70" height="38" rx="10"/><text class="l1-cx-nome" x="6" y="15">vara</text><text class="l1-cx-tipo" x="64" y="31" text-anchor="end">str</text></g>
+              <g transform="translate(112 138)"><rect class="l1-cx l1-cx-float" width="70" height="38" rx="2"/><text class="l1-cx-nome" x="6" y="15">valor_causa</text><text class="l1-cx-tipo" x="64" y="31" text-anchor="end">float</text></g>
+              <text x="252" y="70" text-anchor="middle" class="l1-svg-mini">× 12 capas</text>
+              <g fill="#FFFFFF" stroke="#CBD5E1"><rect x="214" y="84" width="76" height="16" rx="3"/><rect x="214" y="104" width="76" height="16" rx="3"/><rect x="214" y="124" width="76" height="16" rx="3"/><rect x="214" y="144" width="76" height="16" rx="3"/></g>
+              <text x="252" y="182" text-anchor="middle" class="l1-svg-mini">em vez de 48 soltas</text>
+            </svg>
+            <figcaption id="cap-12">Uma capa chamada <code>processo</code> com as quatro caixinhas dentro, mantendo o tipo de cada uma; ao lado, as doze capas, uma por processo da pauta, que substituem as 48 variáveis soltas.</figcaption>
+          </figure>
+        </div>
+        <div class="caixa-preta"><span class="marcador"><span class="ic" aria-hidden="true">■</span>Caixa-preta</span><p><strong>Dicionário</strong> (<code>dict</code>): guarda pares de nome e conteúdo numa variável só, como <code>processo["nome_parte"]</code>. É o tema da lição 3. Também ficam para depois: <code>bool</code> (verdadeiro ou falso, lição 2), <code>None</code> (a caixinha vazia, lição 3), a <strong>tupla</strong> que apareceu no slide 10 (o par <code>(15.4, 0)</code>, lição 3) e o motivo de <code>0.1 + 0.2</code> mostrar <code data-saida="ponto_flutuante">0.30000000000000004</code> (aritmética de ponto flutuante, fora do escopo do curso).</p></div>
+        <div class="instrucao"><p class="instrucao-titulo"><span aria-hidden="true">→</span> Como fazer</p><ul><li><strong>O que fazer:</strong> aplique a regra das caixinhas soltas, “pede-se pelo nome, sem aspas”, à linha da Dalva.</li><li><strong>Quanto falta:</strong> uma escolha; dá para tentar de novo sem penalidade.</li><li><strong>Quando está completo:</strong> quando o retorno marca “Correto”.</li></ul></div>
+        <div data-quiz data-required data-interaction-id="l1-q3" data-correct-response="A" data-requirement-label="Distinguir o nome da variável do texto entre aspas (slide 12)">
+          <p><strong>A Dalva quer a linha “Requerente: Ana Ribeiro Nogueira” e escreveu <code>print("Requerente:", "nome_parte")</code>. A tela mostrou <code data-saida="requerente_literal">Requerente: nome_parte</code>. Qual é a correção?</strong></p>
+          <div class="quiz-options">
+            <button type="button" class="quiz-option" data-answer="A" data-correct data-correct-feedback="Correto: sem aspas, nome_parte é o nome da caixinha, e o Python entrega o conteúdo. A linha corrigida mostra “Requerente: Ana Ribeiro Nogueira”."><span class="quiz-letra" aria-hidden="true">A</span><span class="quiz-corpo"><span class="quiz-texto">Tirar as aspas de <code>nome_parte</code>, para o Python entregar o conteúdo da caixinha.</span><span class="quiz-porque" data-porque hidden><strong>Por quê:</strong> sem aspas, <code>nome_parte</code> é o nome da caixinha, e o Python entrega o conteúdo. A linha corrigida mostra <code data-saida="requerente_conteudo">Requerente: Ana Ribeiro Nogueira</code>.</span></span></button>
+            <button type="button" class="quiz-option" data-answer="B" data-incorrect-feedback="Aspas simples também são moldura de texto: 'nome_parte' continua sendo a palavra, e a tela mostraria o mesmo “Requerente: nome_parte”."><span class="quiz-letra" aria-hidden="true">B</span><span class="quiz-corpo"><span class="quiz-texto">Trocar as aspas duplas por simples: <code>'nome_parte'</code> passa a ser lido como variável.</span><span class="quiz-porque" data-porque hidden><strong>Por quê:</strong> aspas simples também são moldura de texto: <code>'nome_parte'</code> continua sendo a palavra, e a tela mostraria o mesmo “Requerente: nome_parte”.</span></span></button>
+            <button type="button" class="quiz-option" data-answer="C" data-incorrect-feedback="Entre aspas, &quot;Nome_Parte&quot; continua sendo só texto: a tela mostraria “Requerente: Nome_Parte”. E, mesmo sem aspas, as maiúsculas criam outro nome: Nome_Parte não existe e daria NameError."><span class="quiz-letra" aria-hidden="true">C</span><span class="quiz-corpo"><span class="quiz-texto">Escrever <code>"Nome_Parte"</code> com iniciais maiúsculas, para o Python reconhecer a variável.</span><span class="quiz-porque" data-porque hidden><strong>Por quê:</strong> entre aspas, <code>"Nome_Parte"</code> continua sendo só texto: a tela mostraria “Requerente: Nome_Parte”. E, mesmo sem aspas, as maiúsculas criam outro nome: <code>Nome_Parte</code> não existe e daria NameError.</span></span></button>
+            <button type="button" class="quiz-option" data-answer="D" data-incorrect-feedback="A caixinha existe e guarda o nome; criá-la de novo não muda nada, porque o print continua pedindo a palavra entre aspas, não a caixinha."><span class="quiz-letra" aria-hidden="true">D</span><span class="quiz-corpo"><span class="quiz-texto">Criar a variável de novo logo antes do <code>print</code>, porque ela se perdeu no caminho.</span><span class="quiz-porque" data-porque hidden><strong>Por quê:</strong> a caixinha existe e guarda o nome; criá-la de novo não muda nada, porque o <code>print</code> continua pedindo a palavra entre aspas, não a caixinha.</span></span></button>
+          </div>
+          <div class="quiz-feedback" data-feedback role="status" aria-live="polite">Escolha uma alternativa.</div>
+        </div>
+        <div class="slide-rodape"><p class="progresso-slide"><span class="progresso-trilho" role="img" aria-label="Progresso: slide 12 de 16"><span class="progresso-preenchido" style="width:75%"></span></span><span class="progresso-texto">Slide 12 de 16</span></p><div class="slide-nav"><button type="button" class="btn-nav" data-nav-prev><span aria-hidden="true">←</span> Anterior</button><button type="button" class="btn-nav" data-nav-next>Próximo <span aria-hidden="true">→</span></button></div></div>
+      </div>
+    </section>
+
+    <!-- 13 · QUANDO USAR -->
+    <section class="slide master-dense" data-slide="13" aria-labelledby="s13">
+      <div class="slide-inner">
+        <div class="slide-topo"><span class="etapa"><span class="etapa-icone" aria-hidden="true">■</span>Prós e contras</span><span class="slide-counter">13 / 16</span></div>
+        <h2 id="s13" tabindex="-1">Quando a caixinha e a moldura certa ajudam, e quando pedem cuidado</h2>
+        <p>A caixinha com nome é o tijolo de todo o curso; a moldura das aspas decide o que ela aceita fazer. Os dois funcionam bem com um olho na origem do dado.</p>
+        <div class="lado-a-lado">
+          <article class="lado-correto">
+            <h3><span class="marcador m-correto"><span class="ic" aria-hidden="true">✓</span>Brilha quando</span></h3>
+            <ul class="key-list">
+              <li><strong>Um dado é usado em mais de um lugar:</strong> guardado numa variável, troca-se uma vez e todos os usos acompanham.</li>
+              <li><strong>O dado entra em conta:</strong> valores e percentuais como <code>float</code> fazem a conta das custas sem calculadora e sem digitação.</li>
+              <li><strong>O identificador tem dígitos:</strong> número do processo, lacre ou CPF como <code>str</code> preservam zeros, pontos e traço.</li>
+              <li><strong>O código quebra:</strong> o traceback diz o tipo e a linha; ler a última linha primeiro poupa a aflição.</li>
+            </ul>
+          </article>
+          <article class="lado-atencao">
+            <h3><span class="marcador m-atencao"><span class="ic" aria-hidden="true">▲</span>Cuidado quando</span></h3>
+            <ul class="key-list">
+              <li><strong>O dado vem de fora:</strong> sistema, planilha e digitação entregam texto. Confira com <code>type()</code> antes de calcular.</li>
+              <li><strong>Não aparece erro:</strong> o erro calado (o <code>15.400,00</code> sem aspas) é pior que o traceback, porque chega ao despacho.</li>
+              <li><strong>São muitos processos:</strong> caixinhas numeradas não escalam; a capa (dicionário) chega na lição 3.</li>
+              <li><strong>A conta é contábil:</strong> <code>float</code> serve às custas do curso; centavos com rigor contábil usam outro tipo (<code>Decimal</code>), fora do escopo.</li>
+            </ul>
+          </article>
+        </div>
+        <p class="ponte"><strong>Próximo passo:</strong> levar a mesma pergunta a uma ficha que você ainda não viu.</p>
+        <div class="slide-rodape"><p class="progresso-slide"><span class="progresso-trilho" role="img" aria-label="Progresso: slide 13 de 16"><span class="progresso-preenchido" style="width:81%"></span></span><span class="progresso-texto">Slide 13 de 16</span></p><div class="slide-nav"><button type="button" class="btn-nav" data-nav-prev><span aria-hidden="true">←</span> Anterior</button><button type="button" class="btn-nav" data-nav-next>Próximo <span aria-hidden="true">→</span></button></div></div>
+      </div>
+    </section>
+
+    <!-- 14 · TRANSFERÊNCIA -->
+    <section class="slide master-dense" data-slide="14" aria-labelledby="s14">
+      <div class="slide-inner">
+        <div class="slide-topo"><span class="etapa"><span class="etapa-icone" aria-hidden="true">●</span>Mão na massa</span><span class="slide-counter">14 / 16</span></div>
+        <h2 id="s14" tabindex="-1">Desafio: a ficha do bem apreendido</h2>
+        <p>Saímos do gabinete para o depósito judicial da comarca. Cada bem apreendido tem a sua ficha: lacre <strong>0001234</strong>, descrição <strong>Notebook 14 polegadas</strong>, quantidade <strong>3</strong> e valor avaliado de <strong>R$ 2.350,50</strong> por unidade. O depósito precisa do valor total (quantidade × valor avaliado). Decida o tipo de cada campo.</p>
+        <div class="duas-colunas">
+          <figure class="figura-licao" aria-labelledby="cap-14" style="--razao-svg:1.6">
+            <svg viewBox="0 0 320 200" role="img" aria-labelledby="cap-14">
+              <rect x="8" y="8" width="304" height="184" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+              <text x="20" y="32" class="l1-svg-titulo">FICHA DO BEM APREENDIDO</text>
+              <g transform="translate(20 46)"><rect class="l1-cx l1-cx-vazia" width="136" height="54" rx="8"/><text class="l1-cx-nome" x="8" y="18">numero_lacre</text><text class="l1-cx-valor" x="68" y="42" text-anchor="middle">0001234</text></g>
+              <g transform="translate(164 46)"><rect class="l1-cx l1-cx-vazia" width="136" height="54" rx="8"/><text class="l1-cx-nome" x="8" y="18">descricao</text><text class="l1-cx-valor" x="68" y="42" text-anchor="middle">Notebook 14 pol.</text></g>
+              <g transform="translate(20 112)"><rect class="l1-cx l1-cx-vazia" width="136" height="54" rx="8"/><text class="l1-cx-nome" x="8" y="18">quantidade</text><text class="l1-cx-valor" x="68" y="42" text-anchor="middle">3</text></g>
+              <g transform="translate(164 112)"><rect class="l1-cx l1-cx-vazia" width="136" height="54" rx="8"/><text class="l1-cx-nome" x="8" y="18">valor_avaliado</text><text class="l1-cx-valor" x="68" y="42" text-anchor="middle">2.350,50</text></g>
+              <text x="160" y="184" text-anchor="middle" class="l1-svg-mini">Qual moldura em cada caixinha?</text>
+            </svg>
+            <figcaption id="cap-14">A ficha do bem com quatro caixinhas ainda sem tipo: lacre 0001234, descrição “Notebook 14 polegadas”, quantidade 3 e valor avaliado de R$ 2.350,50 por unidade.</figcaption>
+          </figure>
+          <div data-activity data-required data-requirement-label="Acertar o tipo dos 4 campos do bem apreendido (slide 14)" data-feedback-ok="A ficha está pronta para a conta do valor total.">
+            <div class="instrucao"><p class="instrucao-titulo"><span aria-hidden="true">→</span> Como fazer</p><ul><li><strong>O que fazer:</strong> para cada campo, pergunte “vou fazer conta com isso?” e, se sim, “pode ter centavos ou fração?”.</li><li><strong>Quanto falta:</strong> a barra mostra os campos ainda sem resposta.</li><li><strong>Quando está completo:</strong> 4 de 4 corretos; aí a ficha certa se revela.</li></ul></div>
+            <p class="progresso-atividade"><span class="trilho" aria-hidden="true"><i data-activity-fill></i></span><span data-activity-progress role="status" aria-live="polite">0 de 4 campos respondidos — faltam 4.</span></p>
+            <div class="activity-grid">
+              <div class="campo-atividade"><label for="l1-bem-lacre">numero_lacre (0001234)</label><select id="l1-bem-lacre" data-save data-correct-value="texto (str)" data-porque-ok="É identificador: ninguém soma lacres, e os zeros à esquerda precisam ficar. Por isso, entre aspas." data-porque-no="O lacre não entra em conta e tem zeros à esquerda: sem aspas o Python recusa 0001234 com SyntaxError, e int(&quot;0001234&quot;) vira 1234, perdendo os zeros." aria-describedby="nota-l1-bem-lacre"><option value="">Escolha…</option><option>inteiro (int)</option><option>texto (str)</option><option>decimal (float)</option></select><span class="campo-nota" id="nota-l1-bem-lacre" data-nota-for="l1-bem-lacre"></span></div>
+              <div class="campo-atividade"><label for="l1-bem-descricao">descricao (Notebook 14 polegadas)</label><select id="l1-bem-descricao" data-save data-correct-value="texto (str)" data-porque-ok="Palavras, espaços e números misturados: é texto, entre aspas." data-porque-no="A descrição tem letras e espaços; só cabe como texto, entre aspas. O 14 faz parte do nome do produto, não de uma conta." aria-describedby="nota-l1-bem-descricao"><option value="">Escolha…</option><option>decimal (float)</option><option>inteiro (int)</option><option>texto (str)</option></select><span class="campo-nota" id="nota-l1-bem-descricao" data-nota-for="l1-bem-descricao"></span></div>
+              <div class="campo-atividade"><label for="l1-bem-quantidade">quantidade (3)</label><select id="l1-bem-quantidade" data-save data-correct-value="inteiro (int)" data-porque-ok="Conta-se unidade por unidade, sem fração, e ela entra na multiplicação." data-porque-no="A quantidade entra na conta e não tem fração: são 3 notebooks. Texto não multiplica, e decimal sugeriria que pode haver 2,5 notebooks." aria-describedby="nota-l1-bem-quantidade"><option value="">Escolha…</option><option>texto (str)</option><option>decimal (float)</option><option>inteiro (int)</option></select><span class="campo-nota" id="nota-l1-bem-quantidade" data-nota-for="l1-bem-quantidade"></span></div>
+              <div class="campo-atividade"><label for="l1-bem-valor">valor_avaliado (R$ 2.350,50)</label><select id="l1-bem-valor" data-save data-correct-value="decimal (float)" data-porque-ok="Dinheiro com centavos que entra na conta: decimal, escrito com ponto, 2350.50." data-porque-no="O valor tem centavos e entra na multiplicação: precisa ser decimal, escrito com ponto (2350.50). Como inteiro, perderia os centavos. Como texto é pior: 3 * &quot;2350.50&quot; não dá erro, repete o texto três vezes ('2350.502350.502350.50'), e o número errado segue adiante calado." aria-describedby="nota-l1-bem-valor"><option value="">Escolha…</option><option>inteiro (int)</option><option>decimal (float)</option><option>texto (str)</option></select><span class="campo-nota" id="nota-l1-bem-valor" data-nota-for="l1-bem-valor"></span></div>
+            </div>
+            <button type="button" class="btn" data-check-activity>Verificar os 4 campos</button>
+            <div class="quiz-feedback" data-activity-feedback role="status" aria-live="polite">Responda os 4 campos e clique em verificar: cada campo devolve o motivo.</div>
+            <div class="caixa revelar-ao-concluir"><p><strong>A ficha certa:</strong> <code>numero_lacre = "0001234"</code> · <code>descricao = "Notebook 14 polegadas"</code> · <code>quantidade = 3</code> · <code>valor_avaliado = 2350.50</code>. O Python confirma os tipos <code data-saida-linha="bem_apreendido:0">str str int float</code>, e <code>quantidade * valor_avaliado</code> dá <code data-saida-linha="bem_apreendido:1">7051.5</code>, ou seja, R$ 7.051,50.</p></div>
+          </div>
+        </div>
+        <div class="slide-rodape"><p class="progresso-slide"><span class="progresso-trilho" role="img" aria-label="Progresso: slide 14 de 16"><span class="progresso-preenchido" style="width:88%"></span></span><span class="progresso-texto">Slide 14 de 16</span></p><div class="slide-nav"><button type="button" class="btn-nav" data-nav-prev><span aria-hidden="true">←</span> Anterior</button><button type="button" class="btn-nav" data-nav-next>Próximo <span aria-hidden="true">→</span></button></div></div>
+      </div>
+    </section>
+
+    <!-- 15 · SÍNTESE + BILHETE -->
+    <section class="slide master-focus no-side-art" data-slide="15" aria-labelledby="s15">
+      <div class="slide-inner">
+        <div class="slide-topo"><span class="etapa"><span class="etapa-icone" aria-hidden="true">◆</span>Síntese</span><span class="slide-counter">15 / 16</span></div>
+        <h2 id="s15" tabindex="-1">O que fica desta lição</h2>
+        <ol class="sintese-lista">
+          <li><strong>A caixinha com nome.</strong> A variável guarda um valor sob um nome que diz o que ela guarda; o <code>=</code> guarda, não pergunta.</li>
+          <li><strong>A moldura das aspas.</strong> Com aspas é texto; sem aspas é número. Decide-se pela pergunta “vou fazer conta com isso?”, e dado que vem de fora se confere com <code>type()</code>.</li>
+          <li><strong>A certidão lida de baixo para cima.</strong> A última linha do traceback diz o tipo do erro; as de cima, onde. Corrige-se um de cada vez.</li>
+          <li><strong>O caderno que amanhece limpo.</strong> No Colab, execute de cima para baixo e, ao reabrir, use “Executar tudo”.</li>
+        </ol>
+        <div class="registro"><label for="l1-bilhete">Bilhete de saída: explique à Dalva por que o número do processo fica entre aspas e o valor da causa não, e o que fazer quando o valor chegar do sistema como “15.400,00”.</label><textarea maxlength="2000" id="l1-bilhete" data-save data-required data-min-words="25" data-requirement-label="Escrever o bilhete para a Dalva com pelo menos 25 palavras (slide 15)" placeholder="Dalva, …"></textarea></div>
+        <div class="button-row"><button type="button" class="example-button" data-example="modelo-l1" aria-expanded="false" aria-controls="modelo-l1">Comparar com uma resposta-modelo (depois de escrever)</button></div>
+        <div id="modelo-l1" class="example-panel">“Dalva, é a moldura das aspas que decide o tipo. O número do processo fica entre aspas porque é texto: ninguém faz conta com ele, e as aspas preservam os zeros, os pontos e o traço. O valor da causa fica sem aspas porque é decimal e entra na conta das custas. Se ele chegar do sistema como "15.400,00", não basta tirar as aspas: o Python guarda um par de números sem avisar. Trate o texto (tire o ponto, troque a vírgula por ponto), converta com float() e confira com type() antes de calcular.”</div>
+        <div class="slide-rodape"><p class="progresso-slide"><span class="progresso-trilho" role="img" aria-label="Progresso: slide 15 de 16"><span class="progresso-preenchido" style="width:94%"></span></span><span class="progresso-texto">Slide 15 de 16</span></p><div class="slide-nav"><button type="button" class="btn-nav" data-nav-prev><span aria-hidden="true">←</span> Anterior</button><button type="button" class="btn-nav" data-nav-next>Próximo <span aria-hidden="true">→</span></button></div></div>
+      </div>
+    </section>
+
+    <!-- 16 · FONTES E CONCLUSÃO -->
+    <section class="slide closing-slide master-dense" data-slide="16" aria-labelledby="s16">
+      <div class="slide-inner">
+        <div class="slide-topo"><span class="etapa"><span class="etapa-icone" aria-hidden="true">✦</span>Fecho</span><span class="slide-counter">16 / 16</span></div>
+        <h2 id="s16" tabindex="-1">Fontes, Colab e conclusão</h2>
+        <div class="duas-colunas">
+          <div>
+            <ul class="fontes">
+              <li><span class="fonte-caderno">LANDIM, N. M. D. <em>Introdução à Programação com Python</em>: caderno de estudos. Esmat, 2026, cap. 1</span>: roteiro, cenário da Comarca de Guaraí e exemplos da lição.</li>
+              <li><a href="https://docs.python.org/pt-br/3/tutorial/introduction.html" target="_blank" rel="noopener noreferrer">Tutorial oficial do Python: uma introdução informal<span class="visually-hidden"> (abre em nova janela)</span></a>: variáveis, atribuição, números e textos.</li>
+              <li><a href="https://docs.python.org/pt-br/3/tutorial/errors.html" target="_blank" rel="noopener noreferrer">Tutorial oficial do Python: erros e exceções<span class="visually-hidden"> (abre em nova janela)</span></a>: SyntaxError, NameError, TypeError, ValueError e a leitura do traceback.</li>
+              <li><a href="https://docs.python.org/pt-br/3/tutorial/floatingpoint.html" target="_blank" rel="noopener noreferrer">Tutorial oficial do Python: aritmética de ponto flutuante<span class="visually-hidden"> (abre em nova janela)</span></a>: por que <code>0.1 + 0.2</code> não dá 0.3 exato.</li>
+              <li><a href="https://peps.python.org/pep-0008/" target="_blank" rel="noopener noreferrer">PEP 8, guia de estilo do Python<span class="visually-hidden"> (abre em nova janela)</span></a>: nomes em minúsculas com traço baixo.</li>
+              <li><a href="https://colab.research.google.com/" target="_blank" rel="noopener noreferrer">Google Colab<span class="visually-hidden"> (abre em nova janela)</span></a>: o ambiente do curso.</li>
+            </ul>
+            <p class="nota">Toda saída de código mostrada nesta lição foi obtida executando o Python 3.12; no Colab o cabeçalho das mensagens de erro tem outro formato, e o palpite “Did you mean” pode não aparecer.</p>
+          </div>
+          <div>
+            <div class="bloco-codigo"><div class="codigo-topo"><span class="badge">Leve para o Colab</span><button type="button" class="btn-copiar" data-l1-copiar="l1-colab">Copiar</button></div>
+<pre id="l1-colab"># A ficha de UM processo
+numero_processo = "0004512-33.2026.8.27.0001"
+nome_parte = "Ana Ribeiro Nogueira"
+vara = "1ª Vara Cível"
+valor_causa = 15400.00
+
+# Custas iniciais: 1% sobre o valor da causa (tabela da comarca)
+custas = valor_causa * 0.01
+
+print(nome_parte, "—", numero_processo)
+print(type(numero_processo), type(valor_causa))
+print("Custas iniciais: R$", custas)</pre></div>
+            <p class="nota"><strong>Comentário:</strong> as linhas que começam com <code>#</code> são ignoradas pelo Python e servem ao leitor. O bom comentário diz o porquê (de onde vem o 1%), não “multiplica por 0.01”.</p>
+            <p class="ponte"><strong>Na lição 2:</strong> a ficha passa a decidir. O computador escolhe a frase do despacho conforme o status dos autos (<code>if</code>) e repete a escolha para a pauta inteira (<code>for</code>).</p>
+          </div>
+        </div>
+        <section class="completion-panel" aria-labelledby="completion-title">
+          <p class="completion-eyebrow">Conclusão da lição</p>
+          <h3 id="completion-title">Confira seu progresso</h3>
+          <p class="completion-message" data-completion-message role="status" aria-live="polite">Verificando os requisitos…</p>
+          <ul class="completion-checks" data-completion-checks aria-label="Requisitos para concluir"></ul>
+          <p class="persistence-status" data-persistence-status role="status" aria-live="polite"></p>
+          <p class="nota">Fora do LMS, a conclusão fica registrada apenas neste navegador. O vídeo não é requisito.</p>
+          <div class="completion-actions button-row">
+            <button type="button" class="btn" data-complete disabled>Concluir lição</button>
+            <button type="button" class="btn btn-secundario" data-print>Imprimir</button>
+            <button type="button" class="btn btn-secundario" data-reset>Limpar respostas e progresso</button>
+          </div>
+        </section>
+        <div class="slide-rodape"><p class="progresso-slide"><span class="progresso-trilho" role="img" aria-label="Progresso: slide 16 de 16"><span class="progresso-preenchido" style="width:100%"></span></span><span class="progresso-texto">Slide 16 de 16</span></p><div class="slide-nav"><button type="button" class="btn-nav" data-nav-prev><span aria-hidden="true">←</span> Anterior</button><button type="button" class="btn-nav" data-nav-next disabled>Próximo <span aria-hidden="true">→</span></button></div></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="../assets/scorm-runtime.js"></script>
+  <script src="../assets/licao-runtime.js"></script>
+  <script src="../assets/licao-01-dados.js"></script>
+  <script src="../dados/processos.js"></script>
+  <script src="../assets/licao-01.js"></script>
+</body>
+</html>
